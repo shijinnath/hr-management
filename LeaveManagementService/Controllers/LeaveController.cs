@@ -4,6 +4,8 @@ using LeaveManagementService.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using CommonSharedLibraries.Common.Models;
+using System.Net;
 
 namespace LeaveManagementService.Controllers
 {
@@ -22,7 +24,7 @@ namespace LeaveManagementService.Controllers
         public async Task<IActionResult> GetAllLeaves()
         {
             var leaves = await _mediator.Send(new GetAllLeavesQuery());
-            return Ok(leaves);
+            return Ok(new APIResponse<IEnumerable<LeaveRequest>> { StatusCode= (int)HttpStatusCode.OK,Message="Success", Data = leaves });
         }
 
         [HttpGet("{id}")]
