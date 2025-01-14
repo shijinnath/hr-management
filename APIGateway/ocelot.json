@@ -1,0 +1,32 @@
+{
+  "Routes": [
+
+    {
+      "UpstreamPathTemplate": "/gateway/auth-service/api/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7247
+        }
+      ],
+      "SwaggerKey": "AuthService"
+    },
+    {
+      "UpstreamPathTemplate": "/gateway/employee-service/api/{everything}",
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7188
+        }
+      ],
+      "SwaggerKey": "AuthService"
+    }  
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7087"
+  }
+} 
