@@ -130,5 +130,18 @@ app.Use(async (context, next) =>
 //    var dbContext = scope.ServiceProvider.GetRequiredService<LeaveDbContext>();
 //    dbContext.Database.Migrate(); // Apply pending migrations
 //}
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    try
+    {
+        var context = services.GetRequiredService<LeaveDbContext>();
+        SeedData.Initialize(context);
+    }
+    catch (Exception ex)
+    {
+        // Handle exceptions if necessary
+        Console.WriteLine($"An error occurred while seeding the database: {ex.Message}");
+    }
+}
 app.Run();
