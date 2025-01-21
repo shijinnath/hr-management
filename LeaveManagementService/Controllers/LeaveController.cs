@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CommonSharedLibraries.Common.Models;
 using System.Net;
+using StackExchange.Redis;
 
 namespace LeaveManagementService.Controllers
 {
@@ -57,6 +58,12 @@ namespace LeaveManagementService.Controllers
         {
             var balances = await _mediator.Send(new GetLeaveBalancesQuery { EmployeeId = employeeId });
             return Ok(balances);
+        } 
+        [HttpGet("leave-category")]
+        public async Task<IActionResult> GetLeaveCategory()
+        {
+            var leaveCategories = await _mediator.Send(new GetAllLeaveCategoryQuery());
+            return Ok(new APIResponse<IEnumerable<LeaveCategory>> { StatusCode = (int)HttpStatusCode.OK, Message = "Success", Data = leaveCategories });
         }
         //[HttpPost]
         //public async Task<IActionResult> CreateLeaveRequest([FromBody] CreateLeaveRequestCommand command)

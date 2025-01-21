@@ -3,8 +3,9 @@ using MediatR;
 
 namespace LeaveManagementService.Queries
 {
-    public class GetAllLeaveCategoryQuery : IRequest<IEnumerable<LeaveCategory>>
-    { 
+    public class GetLeaveByIdQuery : IRequest<LeaveRequest>
+    {
+        public int Id { get; set; }
     }
 
 }
